@@ -39,6 +39,43 @@ activities = {
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
     }
+    ,
+    "Soccer Team": {
+        "description": "Join the school soccer team for practices and matches",
+        "schedule": "Mondays, Thursdays, 4:00 PM - 6:00 PM",
+        "max_participants": 22,
+        "participants": ["liam@mergington.edu", "ava@mergington.edu"]
+    },
+    "Swimming Club": {
+        "description": "Swim training and competition preparation",
+        "schedule": "Tuesdays, Fridays, 5:00 PM - 6:30 PM",
+        "max_participants": 18,
+        "participants": ["noah@mergington.edu"]
+    },
+    "Art Club": {
+        "description": "Explore drawing, painting, and mixed media projects",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 16,
+        "participants": ["mia@mergington.edu", "sophia@mergington.edu"]
+    },
+    "Drama Society": {
+        "description": "Acting, play production, and stagecraft",
+        "schedule": "Thursdays, 4:00 PM - 6:00 PM",
+        "max_participants": 25,
+        "participants": ["isabella@mergington.edu"]
+    },
+    "Debate Club": {
+        "description": "Practice debating skills and compete in tournaments",
+        "schedule": "Mondays, 4:00 PM - 5:30 PM",
+        "max_participants": 20,
+        "participants": ["oliver@mergington.edu"]
+    },
+    "Math Olympiad": {
+        "description": "Advanced problem solving and competition prep",
+        "schedule": "Fridays, 3:30 PM - 5:00 PM",
+        "max_participants": 15,
+        "participants": ["emma@mergington.edu", "liam@mergington.edu"]
+    }
 }
 
 
@@ -61,6 +98,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up")
 
     # Add student
     activity["participants"].append(email)
